@@ -1,0 +1,75 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль пользователя postgres:
+psql (14.6)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=# \c skypro
+Вы подключены к базе данных "skypro" как пользователь "postgres".
+skypro=# CREATE TABLE employee (
+skypro(# id BIGSERIAL NOT NULL PRIMARY KEY,
+skypro(# first_name VARCHAR(50) NOT NULL,
+skypro(# last_name VARCHAR(50) NOT NULL,
+skypro(# gender VARCHAR(6) NOT NULL,
+skypro(# age INT NOT NULL
+skypro(# );
+CREATE TABLE
+skypro=# INSERT INTO employee (
+skypro(# first_name, last_name, gender, age)
+skypro-# VALUES ('Petr', 'Petrov', M, 21);
+skypro=# INSERT INTO employee (
+skypro(# first_name, last_name, gender, age)
+skypro-# VALUES ('Anton', 'Antonov', M, 24);
+skypro=# INSERT INTO employee (
+skypro(# first_name, last_name, gender, age)
+skypro-# VALUES ('Ivan', 'Ivanov', M, 20);
+
+skypro=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  3 | Ivan       | Ivanov    | M      |  33
+  1 | Petr       | Petrov    | M      |  21
+  2 | Anton      | Antonov   | M      |  24
+(3 ёЄЁюъш)
+
+
+skypro=# UPDATE employee SET age = 38 WHERE id = 3;
+UPDATE 1
+skypro=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Petr       | Petrov    | M      |  21
+  2 | Anton      | Antonov   | M      |  24
+  3 | Ivan       | Ivanov    | M      |  38
+(3 ёЄЁюъш)
+
+
+skypro=# UPDATE employee SET first_name = 'Andrey', last_name = 'Andreev', age = 18 WHERE id = 3;
+UPDATE 1
+skypro=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  1 | Petr       | Petrov    | M      |  21
+  2 | Anton      | Antonov   | M      |  24
+  3 | Andrey     | Andreev   | M      |  18
+(3 ёЄЁюъш)
+
+
+skypro=# DELETE FROM employee WHERE id = 1;
+DELETE 1
+skypro=# SELECT * FROM employee;
+ id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  2 | Anton      | Antonov   | M      |  24
+  3 | Andrey     | Andreev   | M      |  18
+(2 ёЄЁюъш)
+
+
+skypro=#
